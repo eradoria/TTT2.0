@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import TextField from "@mui/material/TextField";
+import "../AddPlayer.css";
 
 export default function AddPlayer() {
   const [player, setPlayer] = useState("");
   const [rank, setRank] = useState();
+  const [id, setId] = useState(0);
 
-  // const handleListing = () => {
-  //   Axios.post("https://localhost:3001/insert", {
-  //     player: player,
-  //     rank: rank,
-  //   });
+  // const counterId = () => {
+  //   setId(id + 1);
   // };
 
   const handleListing = async () => {
     try {
-      // const res = await axios.post("http://localhost:3001/insert");
-      axios.post("https://localhost:3001/insert", {
+      axios.post("http://localhost:3001/insert", {
+        id: setId(id + 1),
         player: player,
         rank: rank,
       });
