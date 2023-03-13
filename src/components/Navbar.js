@@ -2,7 +2,8 @@ import React from "react";
 import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import "../Navbar.css"
+import "../Navbar.css";
+import { checkAuth } from "../App";
 
 const Navigation = (props) => {
   return (
@@ -23,7 +24,7 @@ const Navigation = (props) => {
               <Link to="/addplayer">Add Player</Link>
             </li>
             <li className="nav-list-item">
-              <Link to="/login">Log Out</Link>
+              <Link to="/login">{checkAuth ? "Log Out" : "Login"}</Link>
             </li>
           </ul>
         </Toolbar>

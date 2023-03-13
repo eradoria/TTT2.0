@@ -1,8 +1,13 @@
 .nav-list {
   display: flex;
   width: auto;
+  color: azure;
   list-style-type: none;
   text-decoration: none;
   justify-content: space-between;
   gap: 15px;
+  margin-bottom: 20px;
+}
+.nav-list-item {
+  text-decoration: none;
 }
