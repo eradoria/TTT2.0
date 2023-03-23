@@ -16,7 +16,7 @@ export default function AddPlayer() {
 
   const handleListing = async () => {
     try {
-      axios.post("http://localhost:3001/insert", {
+      axios.post("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/insert", {
         player: player,
         rank: rank,
       });

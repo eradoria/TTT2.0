@@ -14,18 +14,25 @@ import Button from "@mui/material/Button";
 import "../Home.css";
 
 export default function Home(props) {
-  const [rankList, setRnakList] = useState([]);
+  const [rankList, setRankList] = useState([]);
   const [newRank, setNewRank] = useState();
 
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/rankings").then((response) => {
+  //     setRankList(response.data);
+  //   });
+  // }, []);
   useEffect(() => {
-    axios.get("http://localhost:3001/insert").then((response) => {
-      setRnakList(response.data);
-    });
+    axios
+      .get("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings")
+      .then((response) => {
+        setRankList(response.data);
+      });
   }, []);
 
   const handleListing = async (id) => {
     try {
-      axios.put("http://localhost:3001/update", {
+      axios.put("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/update", {
         id: id,
         newRank: newRank,
       });
@@ -36,7 +43,9 @@ export default function Home(props) {
 
   const deleteListing = async (id) => {
     try {
-      axios.delete(`http://localhost:3001/delete/${id}`);
+      axios.delete(
+        `https://ttt-backend-ht7uwdj12-eradoria.vercel.app/delete/${id}`
+      );
     } catch (error) {
       console.log(error);
     }
