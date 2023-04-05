@@ -7,19 +7,11 @@ import Button from "@mui/material/Button";
 import "../AddPlayer.css";
 
 export default function AddPlayer() {
-  // const [id, setId] = useState();
+  const [id, setId] = useState();
   const [player, setPlayer] = useState("");
   const [rank, setRank] = useState();
   const [newRank, setNewRank] = useState();
   const [playerList, setPlayerList] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings")
-  //     .then((response) => {
-  //       setPlayerList(response.data);
-  //     });
-  // }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -55,9 +47,10 @@ export default function AddPlayer() {
     }
   };
 
-  const handleReadded = async (id) => {
+  const handleReadded = async () => {
     try {
       axios.put("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/update", {
+        // axios.put("http://localhost:3001/readd", {
         id: id,
         newRank: newRank,
       });
@@ -67,7 +60,8 @@ export default function AddPlayer() {
   };
 
   return (
-    <div>
+    <div className="addPlayer-container">
+      <h1>Add New Player</h1>
       <div className="form">
         <Box
           component="form"
@@ -105,7 +99,7 @@ export default function AddPlayer() {
           </Stack>
         </Box>
       </div>
-
+      <h1>Or Previous Player</h1>
       <div className="form2">
         <Box
           component="form"
@@ -115,11 +109,15 @@ export default function AddPlayer() {
           noValidate
           autoComplete="off"
         >
-          <select>
+          <select
+            onChange={(event) => {
+              setId(event.target.value);
+            }}
+          >
             {playerList.map((x) => {
               return (
-                <option key={x.key} value={x.id}>
-                  player {x.value}
+                <option key={x.key} value={x.key}>
+                  {x.value}
                 </option>
               );
             })}

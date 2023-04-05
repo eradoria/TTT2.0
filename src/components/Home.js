@@ -27,6 +27,7 @@ export default function Home(props) {
       .get("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings")
       .then((response) => {
         setRankList(response.data);
+        console.log(response.data);
       });
   }, []);
 
@@ -62,6 +63,7 @@ export default function Home(props) {
         </TableHead>
         <TableBody>
           {rankList
+            .filter((player) => player.status.includes("R"))
             .sort((a, b) => a.rank - b.rank)
             .map((x, idx) => (
               <TableRow key={x._id}>
