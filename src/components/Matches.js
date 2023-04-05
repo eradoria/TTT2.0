@@ -30,8 +30,78 @@ export default function matches() {
 
   return (
     <div className="matches-container">
-      <div className="match1-container"></div>
-      <div className="match2-container"></div>
+      <div className="match1-container">
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <select
+            onChange={(event) => {
+              setId(event.target.value);
+            }}
+          >
+            {playerList.map((x) => {
+              return (
+                <option key={x.key} value={x.key}>
+                  {x.value}
+                </option>
+              );
+            })}
+          </select>
+
+          <TextField id="standard-basic" label="Rank" variant="standard" />
+        </Box>
+
+        <Stack spacing={2} direction="row">
+          <Button
+            className="button"
+            variant="contained"
+            onClick={handleReadded}
+          >
+            Save
+          </Button>
+        </Stack>
+      </div>
+      <div className="match2-container">
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <select
+            onChange={(event) => {
+              setId(event.target.value);
+            }}
+          >
+            {playerList.map((x) => {
+              return (
+                <option key={x.key} value={x.key}>
+                  {x.value}
+                </option>
+              );
+            })}
+          </select>
+
+          <TextField id="standard-basic" label="Rank" variant="standard" />
+        </Box>
+
+        <Stack spacing={2} direction="row">
+          <Button
+            className="button"
+            variant="contained"
+            onClick={handleReadded}
+          >
+            Save
+          </Button>
+        </Stack>
+      </div>
     </div>
   );
 }
