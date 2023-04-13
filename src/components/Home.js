@@ -13,9 +13,10 @@ import { checkAuth } from "../App";
 import Button from "@mui/material/Button";
 import "../Home.css";
 
-export default function Home(props) {
+export default function Home() {
   const [rankList, setRankList] = useState([]);
   const [newRank, setNewRank] = useState();
+  const [newStatus, setNewStatus] = useState();
 
   // useEffect(() => {
   //   axios.get("http://localhost:3001/rankings").then((response) => {
@@ -42,15 +43,29 @@ export default function Home(props) {
     }
   };
 
-  const deleteListing = async (id) => {
+  const removeListing = async (id) => {
     try {
-      axios.delete(
-        `https://ttt-backend-ht7uwdj12-eradoria.vercel.app/delete/${id}`
-      );
+      const newStatus = "NR";
+      await axios.put("http://localhost:3001/remove", {
+        id: id,
+        newStatus: newStatus,
+      });
+      console.log("Listing removed successfully");
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const removeListing = async (id) => {
+  //   try {
+  //     axios.put("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/remove", {
+  //       id: id,
+  //       newStatus: newStatus,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -76,7 +91,7 @@ export default function Home(props) {
                   <TableCell>
                     <DeleteIcon
                       // add onClick method here
-                      onClick={() => deleteListing(x._id)}
+                      onClick={() => removeListing(x._id)}
                       className="delete-icon"
                     />
                     <div className="update-input">
