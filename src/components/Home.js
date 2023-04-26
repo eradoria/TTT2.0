@@ -16,7 +16,6 @@ import "../Home.css";
 export default function Home() {
   const [rankList, setRankList] = useState([]);
   const [newRank, setNewRank] = useState();
-  const [newStatus, setNewStatus] = useState();
 
   // useEffect(() => {
   //   axios.get("http://localhost:3001/rankings").then((response) => {
@@ -44,9 +43,10 @@ export default function Home() {
   };
 
   const removeListing = async (id) => {
+    const newStatus = "";
+
     try {
-      const newStatus = "NR";
-      await axios.put("http://localhost:3001/remove", {
+      axios.put("https://ttt-backend-942ms6cba-eradoria.vercel.app/remove", {
         id: id,
         newStatus: newStatus,
       });
@@ -55,17 +55,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
-  // const removeListing = async (id) => {
-  //   try {
-  //     axios.put("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/remove", {
-  //       id: id,
-  //       newStatus: newStatus,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div>

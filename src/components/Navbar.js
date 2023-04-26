@@ -21,6 +21,9 @@ const Navigation = (props) => {
               <Link to="/">Rankings</Link>
             </li>
             <li className="nav-list-item">
+              <Link to="/matches">Matches</Link>
+            </li>
+            <li className="nav-list-item">
               <Link to="/addplayer">Add Player</Link>
             </li>
             <li className="nav-list-item">

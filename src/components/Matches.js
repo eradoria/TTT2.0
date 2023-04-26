@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-export default function matches() {
+const Matches = () => {
   const [id, setId] = useState();
+  // eslint-disable-next-line 
   const [player, setPlayer] = useState("");
   const [playerList, setPlayerList] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      // Fetch data
-      const { data } = await axios.get(
-        "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings"
-      );
-      const results = [];
-      // Store results in the results array
-      data.forEach((value) => {
-        results.push({
-          key: value._id,
-          value: value.player,
-        });
-      });
-      // Update the options state
-      setPlayerList([{ key: "", value: "" }, ...results]);
+      try {
+        const { data } = await axios.get(
+          "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings"
+        );
+        const results = data
+          .filter((player) => player.status === "R")
+          .map((player) => {
+            return {
+              key: player._id,
+              value: player.player,
+            };
+          });
+        setPlayerList([{ key: "", value: "" }, ...results]);
+      } catch (error) {
+        console.error(error);
+      }
     }
-    // console.log(playerList);
 
-    // Trigger the fetch
     fetchData();
   }, []);
 
@@ -57,11 +63,7 @@ export default function matches() {
         </Box>
 
         <Stack spacing={2} direction="row">
-          <Button
-            className="button"
-            variant="contained"
-            onClick={handleReadded}
-          >
+          <Button className="button" variant="contained">
             Save
           </Button>
         </Stack>
@@ -93,15 +95,13 @@ export default function matches() {
         </Box>
 
         <Stack spacing={2} direction="row">
-          <Button
-            className="button"
-            variant="contained"
-            onClick={handleReadded}
-          >
+          <Button className="button" variant="contained">
             Save
           </Button>
         </Stack>
       </div>
     </div>
   );
-}
+};
+
+export default Matches;

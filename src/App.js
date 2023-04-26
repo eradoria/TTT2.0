@@ -11,6 +11,7 @@ import "./App.css";
 import AddPlayer from "./components/AddPlayer";
 import Navbar from "./components/Navbar";
 import Login from "./components/login";
+import Matches from "./components/Matches";
 
 export const checkAuth = () => {
   const cookies = cookie.parse(document.cookie);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/AddPlayer" element={<AddPlayer />} />
         </Route>
         <Route path="/" element={<Home />} />
+        <Route path="/matches" element={<Matches />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>

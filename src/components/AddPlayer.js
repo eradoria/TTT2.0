@@ -15,45 +15,58 @@ export default function AddPlayer() {
 
   useEffect(() => {
     async function fetchData() {
-      // Fetch data
-      const { data } = await axios.get(
-        "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings"
-      );
-      const results = [];
-      // Store results in the results array
-      data.forEach((value) => {
-        results.push({
-          key: value._id,
-          value: value.player,
-        });
-      });
-      // Update the options state
-      setPlayerList([{ key: "", value: "" }, ...results]);
+      try {
+        const { data } = await axios.get(
+          "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings"
+        );
+        const results = data
+          .filter((player) => player.status === "")
+          .map((player) => {
+            return {
+              key: player._id,
+              value: player.player,
+            };
+          });
+        setPlayerList([{ key: "", value: "" }, ...results]);
+      } catch (error) {
+        console.error(error);
+      }
     }
-    // console.log(playerList);
 
-    // Trigger the fetch
     fetchData();
   }, []);
 
   const handleListing = async () => {
+    const status = "R";
+    const win = "0";
+    const loss = "0";
+
     try {
-      axios.post("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/insert", {
-        player: player,
-        rank: rank,
-      });
+      await axios.post(
+        "https://ttt-backend-942ms6cba-eradoria.vercel.app/insert",
+        {
+          player: player,
+          rank: rank,
+          status: status,
+          win: win,
+          loss: loss,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleReadded = async () => {
+    const status = "R";
+
     try {
-      axios.put("https://ttt-backend-ht7uwdj12-eradoria.vercel.app/update", {
-        // axios.put("http://localhost:3001/readd", {
+      axios.put("https://ttt-backend-942ms6cba-eradoria.vercel.app/readd", {
         id: id,
         newRank: newRank,
+        status: status,
       });
+      console.log("listing readded");
     } catch (error) {
       console.log(error);
     }
