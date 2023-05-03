@@ -9,7 +9,7 @@ const Matches = () => {
   // eslint-disable-next-line
   const [id, setId] = useState();
   // eslint-disable-next-line
-  const [player, setPlayer] = useState("");
+  // const [player, setPlayer] = useState("");
   const [win, setWin] = useState("0");
   const [loss, setLoss] = useState("0");
   const [playerList, setPlayerList] = useState([]);
@@ -35,17 +35,33 @@ const Matches = () => {
     fetchData();
   }, []);
 
+  const getRecords = async () => {
+    const response = await axios.get(
+      "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/rankings"
+    );
+    return response.data;
+  };
+
   const handleUpdate = async () => {
     try {
+      const players = await getRecords();
+      const player = players.find((p) => p._id === id);
+      const currentWin = player.win;
+      const currentLoss = player.loss;
+      const updatedWin = currentWin + win;
+      const updatedLoss = currentLoss + loss;
+
+      console.log(currentWin);
+      console.log(updatedWin);
+
       await axios.put("http://localhost:3001/updateRecord", {
         id: id,
-        win: win,
-        loss: loss,
+        win: updatedWin,
+        loss: updatedLoss,
       });
-
       console.log("win/loss sent");
     } catch (error) {
-      console.log("front end", error);
+      console.log("front end error", error);
     }
   };
 
