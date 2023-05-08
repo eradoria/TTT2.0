@@ -48,17 +48,17 @@ const Matches = () => {
       const player = players.find((p) => p._id === id);
       const currentWin = player.win;
       const currentLoss = player.loss;
-      const updatedWin = currentWin + win;
-      const updatedLoss = currentLoss + loss;
+      const updatedWin = Number(currentWin) + Number(win);
+      const updatedLoss = Number(currentLoss) + Number(loss);
 
-      console.log(currentWin);
-      console.log(updatedWin);
-
-      await axios.put("http://localhost:3001/updateRecord", {
-        id: id,
-        win: updatedWin,
-        loss: updatedLoss,
-      });
+      await axios.put(
+        "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/updateRecord",
+        {
+          id: id,
+          win: updatedWin,
+          loss: updatedLoss,
+        }
+      );
       console.log("win/loss sent");
     } catch (error) {
       console.log("front end error", error);
