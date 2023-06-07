@@ -52,7 +52,7 @@ const Matches = () => {
       const updatedLoss = Number(currentLoss) + Number(loss);
 
       await axios.put(
-        "https://ttt-backend-ht7uwdj12-eradoria.vercel.app/updateRecord",
+        "https://ttt-backend-qrf61g620-eradoria.vercel.app/updateRecord",
         {
           id: id,
           win: updatedWin,

@@ -73,7 +73,7 @@ export default function Home() {
               <TableRow key={x._id}>
                 <TableCell>
                   {" "}
-                  <Link to={`/Player/${x._id}`}>{x.player}</Link>
+                  <Link to={`/${x._id}`}>{x.player}</Link>
                 </TableCell>
                 <TableCell>{x.rank}</TableCell>
                 {checkAuth() ? (
